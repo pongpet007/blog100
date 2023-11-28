@@ -227,8 +227,12 @@ class Home extends CI_Controller {
 			// $cmd .= "git clone https://github.com/pongpet007/blog100.git /home/brand100/domains/$domain/public_html<br>";
 			// $cmd .= "git config --global --add safe.directory /home/brand100/domains/$domain/public_html<br><br>";	
 			
-			$cmd .= "cd /home/brand100/domains/$domain/public_html  && \\ <br>";
-			$cmd .= "git pull <br><br>";
+			// $cmd .= "cd /home/brand100/domains/$domain/public_html  && \\ <br>";
+			// $cmd .= "git pull <br><br>";
+			
+			$cmd .= "$domain<br>";
+
+
 		}
 		echo $cmd;
 	}

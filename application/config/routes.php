@@ -295,7 +295,7 @@ $route['(VN|vn)\/(.*)_(.*)'] = 'Products/index/$1/$2';
 
 
 
-$route['default_controller'] = 'Home/index2';
+$route['default_controller'] = 'Home/index';
 $route['404_override'] = 'Home/index';
 
 //$route['translate_uri_dashes'] = FALSE;
