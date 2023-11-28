@@ -43,11 +43,11 @@ class Products extends CI_Controller {
 			$data['language'] = "Change Language";
 		}
 
-		$data['counter'] = $this->Counter_model->count();
+		
 		$data["categorys"] = $this->Category_model->getAll();
 		$company = $this->Company_model->getOne(1);		
 		$data['companyData'] = $company;
-				
+		$data['counter'] = $this->Counter_model->count($company->com_id);		
 		$theme_path = $company->theme_path;
 		$data['theme_path'] = $theme_path;
 		$data["theme_assets_path"] = $company->theme_assets_path;
@@ -387,11 +387,11 @@ class Products extends CI_Controller {
 			$data['language'] = "Change Language";
 		}
 		
-		$data['counter'] = $this->Counter_model->count();
+		
 		$data["categorys"] = $this->Category_model->getAll();
 		$company = $this->Company_model->getOne(1);		
 		$data['companyData'] = $company;
-		
+		$data['counter'] = $this->Counter_model->count($company->com_id);
 		
 		$theme_path = $company->theme_path;
 		$data['theme_path'] = $theme_path;

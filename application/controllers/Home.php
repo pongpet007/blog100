@@ -33,6 +33,9 @@ class Home extends CI_Controller {
 	{	
 		$domainname = $_SERVER['SERVER_NAME'];
 
+		$company = $this->Company_model->getOneDomain($domainname);		
+		$data['companyData'] = $company;
+
 		$urlhome = $this->uri->segment(1);
 		
 		if ($urlhome!="") {
@@ -51,6 +54,7 @@ class Home extends CI_Controller {
 		{	
 			$params = array();
 			$params['ip'] = $ipAddress;
+			$params['com_id'] = $company->com_id;
 			$params['dt'] = date('Y-m-d H:i:s');
 			$this->db->insert('counter',$params);			
 		}
@@ -66,13 +70,12 @@ class Home extends CI_Controller {
 		$data['lang'] = $this->session->userdata('site_lang');
 
 		////////////// Counter//////////////////
-		$data['counter'] = $this->Counter_model->count();
+		$data['counter'] = $this->Counter_model->count($company->com_id);
 
 		////////////////////// Theme ///////////////////////////////////
 		$data['brand'] = $this->Brand_model->getAll();
 		// print_r($data['brand']);exit();
-		$company = $this->Company_model->getOneDomain($domainname);		
-		$data['companyData'] = $company;
+		
 
 		$data['countrys'] = $this->Country_model->getAll();		
 
@@ -280,7 +283,7 @@ class Home extends CI_Controller {
 			$menu->submenu = $this->Menu_model->getsub($menu->menu_id);
 		}
 		$data['menus'] = $menus ;		
-		$data['countrys'] = $this->Country_model->getAll();
+		$data['countrys'] = $this->Country_model->getAll($company->com_id);
 		if ($this->session->userdata('site_lang_name') == "th") {
 			$mName = array('ม.ค.','ก.พ.','มี.ค.','เม.ย.',
 			'พ.ค.','มิ.ย.','ก.ค.','ส.ค.',
@@ -310,7 +313,8 @@ class Home extends CI_Controller {
 		if($display=="year")
 		{
 			$sql ="select year(dt) as y ,count(ip) as c 
-			from counter		
+			from counter
+			where com_id = $company->com_id		
 			group by year(dt)
 			";
 			$query = $this->db->query($sql);
@@ -320,7 +324,8 @@ class Home extends CI_Controller {
 		{
 			$sql="select month(dt) as m ,count(ip) as c 
 			from counter 
-			where year(dt) = $y
+			where com_id = $company->com_id
+			and year(dt) = $y
 			group by month(dt)
 			";
 			$query = $this->db->query($sql);
@@ -331,7 +336,8 @@ class Home extends CI_Controller {
 			$sql = "
 			select day(dt) as d ,count(ip) as c 
 			from counter  
-			where year(dt)= $y and month(dt)= $m
+			where com_id = $company->com_id
+			and year(dt)= $y and month(dt)= $m
 			group by day(dt)
 			";
 			$query = $this->db->query($sql);
