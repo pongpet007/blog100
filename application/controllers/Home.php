@@ -32,7 +32,8 @@ class Home extends CI_Controller {
 	public function index()
 	{	
 		$domainname = $_SERVER['SERVER_NAME'];
-
+		
+		$data = array();
 		$company = $this->Company_model->getOneDomain($domainname);		
 		$data['companyData'] = $company;
 
@@ -59,7 +60,6 @@ class Home extends CI_Controller {
 			$this->db->insert('counter',$params);			
 		}
 
-		$data = array();
 
 		$menu_id = "1";
 		$menu_meta = $this->Menu_model->getOne($menu_id);
