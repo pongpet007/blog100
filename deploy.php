@@ -1,8 +1,7 @@
 <?php
 
 
-    $commands = array(
-        "echo $PWD",
+    $commands = array(      
         "whoami",
         "git pull",
         "git status",
