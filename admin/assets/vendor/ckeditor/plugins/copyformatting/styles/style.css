@@ -1,0 +1,308 @@
+.navbar-inverse{
+	background-color: #000 !important;
+    border-color: #080808;
+    margin: -50px 0px 0px 0px !important;
+    border-radius: 0px !important;
+    border-bottom: 1px solid #F22613 !important;
+    z-index: 5;
+}
+.carousel-inner{
+	margin-top: -2px;
+}
+.navbar-inverse .navbar-nav>li>a{
+	color: #fff;
+}
+.nav{
+	padding: 10px 0px;
+}
+.bannerslide{
+	padding-right: 0px !important;
+    padding-left: 0px !important;
+    margin-top: -23px;
+}
+.box-service{
+	margin-top: -100px;
+}
+.thumbnail .caption{
+    padding: 10px 20px;
+    color: #333;
+}
+.thumbnail{
+	background-color: #e4e6ff !important;
+    border: 1px solid #c4c8cb!important;
+    border-radius: 0px !important;
+    padding: 0px !important;
+}
+.youtube{
+	margin-top: 13px;
+}
+.welcome{
+	color: #656565;
+}
+.pwhy{
+	color: #656565;
+}
+
+.bg-theme-colored,.bg-theme-colored>i{
+	color: #fff !important;
+}
+.bg-theme-colored:hover{
+	color: #2E375F !important;
+}
+.box-shadow, .icon-box .icon.icon-border-effect::after{
+	box-shadow: 0 0 0 3px #fff !important;
+}
+.why{
+	background: rgba(38, 0, 0, 0.72);
+    margin-top: -20px;
+}
+.icon-box{
+	padding: 10px 40px !important;
+}
+.ads{
+    background-color: #fff !important;
+    border: 1px solid #5a5657!important;
+    border-radius: 0px !important;
+    padding: 0px !important;
+}
+.parallax1 {
+    /* The image used */
+    background-image: url(../img/background/chorruay-bg-10.jpg);
+
+
+    /* Full height */
+    height: 100%; 
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.parallaxabout{
+    background-image: url(../img/banner/chorruay-bg-01.jpg) !important;
+    /* Full height */
+    height: 100%; 
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.parallax{
+    /* The image used */
+    background-image: url(../img/background/chorruay-bg-02.jpg);
+
+
+    /* Full height */
+    height: 100%; 
+
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.carousel-indicators{
+	z-index: 0 !important;
+}
+.mt-15{
+    color: red !important;
+    font-size: 16px;
+}
+.text-gray{
+    font-size: 13px;
+    color: #7f7f81;
+}
+.bbox{
+    color: #fff;
+    background-color: #231f20;
+    border-color: #231f20;
+}
+.captionads{
+    padding: 10px 16px;
+}
+.bbox2{
+    color: #fff;
+    background-color: #231f20;
+    border-color: #231f20;
+    padding: 6px 35px !important;
+}
+.captionpro>h3{
+    background-color: #b01d2d;
+    padding: 10px;
+    color: #fff;
+    margin-top: 0px;
+    text-align: center;
+    font-size: 20px;
+}
+.captionpro>p{
+    padding: 3px 30px;
+    font-size: 18px;
+}
+.promotion>h1{
+    color: #ffd217;
+
+}
+.menuproduct>li{
+    display: inline-block;
+    border: 1px solid #ededed;
+    background-color: #ededed;
+    padding: 5px 20px;
+    margin: 5px;
+    font-size: 18px;
+}
+.product{
+    background-color: #fff!important;
+    border: 1px solid #c4c8cb!important;
+    border-radius: 0px !important;
+    padding: 0px !important;
+}
+.captionproduct{
+    padding: 13px;
+    text-align: center;
+}
+.captionproduct>h3{
+    font-weight: 500 !important;
+}
+.portfolio{
+    background-color: #000;
+}
+.portfolio1{
+    background-color: #ececec!important;
+    border: 0px solid #c4c8cb!important;
+    border-radius: 0px !important;
+    padding: 0px !important;
+}
+.captionport{
+    text-align: center;
+}
+.captionport>h3{
+    margin: 5px;
+    padding: 10px;
+}
+.portfolio1:hover{
+    background-color: #b01d2d !important;
+}
+.captionport>h3:hover{
+    color: #fff;
+}
+.what{
+    background-color: #eaeaea;
+}
+.what1{
+    border: 1px solid;
+    background-color: #000;
+    border-radius: 10px;
+    padding: 30px;
+}
+.what1>span{
+    font-size: 18px;
+    color: #fff;
+}
+.what3>span{
+    color: #e8851d;
+    font-size: 18px;
+    font-weight: 700;
+}
+.what3>p{
+    color: #818181;
+    font-size: 17px;
+}
+.what1>p{
+    color: #818181;
+    font-size: 17px;
+}
+.border-bottom{
+    background-color: #eda13f;
+}
+.bg-theme-colored{
+    background-color: #231f20 !important;
+}
+.bg-theme-colored:hover{
+    color: #fff !important;
+}
+.ads2{
+    background-color: #ededed!important;
+    border: 1px solid #ededed!important;
+    border-radius: 0px !important;
+    padding: 0px !important;
+}
+.footer-box-one{
+     padding: 0px !important;
+}
+.footer-box-one > div{
+    background: #e35928 !important;
+}
+.footer-box-two{
+    padding: 0px !important;
+}
+.footer-box-two > div{
+    background: #b01d2d !important;
+}
+.footer-box-three{
+    padding: 0px !important;
+}
+.footer-box-three > div{
+    background: #751e2e !important;
+}
+.text-white{
+    color: #fff !important;
+}
+.footer-box p i{
+    color: #fff;
+    margin-left: 10px;
+}
+.footer{
+    background: #fafafa;
+}
+.footer-box-wrapper{
+    margin-top: 0px !important;
+}
+#footer{
+    background-image: url(../img/background/chorruay-bg-11.jpg) !important;
+}
+.layer-overlay.overlay-dark-9::before{
+    background-color: rgba(247, 246, 246, 0) !important;
+}
+.bg-theme-color-2{
+    background: #F22613 !important;
+}
+footer {
+    margin: 0 !important;
+}
+.btn-lg{
+    font-size: 14px;
+    padding: 10px 26px;
+    background-color: #000;
+    color: #fff;
+}
+.btn-theme-colored{
+    color: #fff;
+    background-color: #2E375F;
+    border-color: #2E375F;
+}
+.bg-black-333{
+    background-color: #333333 !important;
+}
+.cont{
+    margin-bottom: 10px;
+}
+.header-top{
+    margin-top: -50px;
+}
+.bg-theme-color-2{
+    padding-bottom: 5px;
+    padding-top: 9px;
+    height: 40px;
+    border-top-width: 5px;
+    background: #8a1e2d !important;
+}
+.divider .container{
+    padding-top: 90px !important;
+    padding-bottom: 50px !important;
+}
+nav{
+    z-index: 10 !important;
+}

@@ -1,0 +1,72 @@
+<section role="main" class="content-body">
+	<header class="page-header">
+		 <h2>Welcome  <span style="color:yellow;"><?php echo $company->com_name ?> expire :<?php echo $company->expire ?> </span> </h2>
+	
+		<div class="right-wrapper pull-right">
+			<ol class="breadcrumbs">
+				<li>
+					<a href="#">
+						<i class="fa fa-home"></i>
+					</a>
+				</li>
+				<li><span> Home  &nbsp;&nbsp;&nbsp;</span></li>
+				
+			</ol>
+	
+			
+		</div>
+	</header>
+
+	<!-- start: page -->
+	<!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">      
+
+    <!-- Main content -->
+    <section class="content">
+<?php if($this->session->flashdata('msg')){ ?>  
+      <div class="alert alert-success alert-dismissible">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <h4><i class="icon fa fa-check"></i> <?=$this->session->flashdata('msg') ?></h4>                
+      </div>
+<?php } ?>
+
+<div class="table-responsive">
+<table  class="table"  width="100%" border="0" cellpadding="1" cellspacing="1" >           
+  <tr>
+    <td colspan="5">
+      Total <b class="text-danger"><?=count($contents)?></b> records | <a href="<?php echo base_url('Content/add/') ?>" class="btn btn-success" target="_blank"> Add content  </a>
+    </td>
+  </tr>
+  
+  <tr align="center" class="bg-info" >
+      <th>Action</th>
+      <th>Content name</th>             
+      <th></th>      
+      
+  </tr>
+  <?php foreach ($contents as $content) { ?>
+    <tr align="center"   >
+      <td align="left">
+       
+        <a class="btn btn-sm btn-warning" href="<?php echo base_url('Content/edit/'.$content->content_id) ?>" target="_blank">edit</a>     
+        <?php if($content->content_id>1){ ?>  
+        <a href="<?php echo base_url('Content/delete/'.$content->content_id ); ?>" class="btn  btn-sm btn-danger" onClick="return confirm('Are you sure ? ');" target="_blank" > <i class="fa fa-trash"></i> del</a>
+        <?php } ?>
+        &nbsp;
+      </td> 
+      <td align="left">
+          <?=$content->content_name?>
+      </td>  
+      <td align="left"><?=$content->udate?></td>                        
+               
+    </tr>      
+  <? } ?>
+  </table>
+</div>
+    </section>
+    <!-- /.content -->
+  </div>
+	<!-- end: page -->
+</section>
