@@ -26,6 +26,6 @@
     <title>Document</title>
 </head>
 <body>
-    
+    <?=$output ?>
 </body>
 </html>
