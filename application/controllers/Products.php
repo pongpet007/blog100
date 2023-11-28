@@ -45,7 +45,8 @@ class Products extends CI_Controller {
 
 		
 		$data["categorys"] = $this->Category_model->getAll();
-		$company = $this->Company_model->getOne(1);		
+		$domainname = $_SERVER['SERVER_NAME'];
+		$company = $this->Company_model->getOneDomain($domainname);		
 		$data['companyData'] = $company;
 		$data['counter'] = $this->Counter_model->count($company->com_id);		
 		$theme_path = $company->theme_path;
@@ -389,7 +390,8 @@ class Products extends CI_Controller {
 		
 		
 		$data["categorys"] = $this->Category_model->getAll();
-		$company = $this->Company_model->getOne(1);		
+		$domainname = $_SERVER['SERVER_NAME'];
+		$company = $this->Company_model->getOneDomain($domainname);			
 		$data['companyData'] = $company;
 		$data['counter'] = $this->Counter_model->count($company->com_id);
 		
