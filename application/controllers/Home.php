@@ -269,6 +269,7 @@ class Home extends CI_Controller {
 		////////////////////// Theme ///////////////////////////////////
 		$company = $this->Company_model->getOne(1);		
 		$data['companyData'] = $company;
+		$data['counter'] = $this->Counter_model->count($company->com_id);
 		$data['meta_title'] = $company->meta_title;
 		$data['meta_keyword'] = $company->meta_keyword;
 		$data['meta_description'] = $company->meta_description;
@@ -283,7 +284,7 @@ class Home extends CI_Controller {
 			$menu->submenu = $this->Menu_model->getsub($menu->menu_id);
 		}
 		$data['menus'] = $menus ;		
-		$data['countrys'] = $this->Country_model->getAll($company->com_id);
+		$data['countrys'] = $this->Country_model->getAll();
 		if ($this->session->userdata('site_lang_name') == "th") {
 			$mName = array('ม.ค.','ก.พ.','มี.ค.','เม.ย.',
 			'พ.ค.','มิ.ย.','ก.ค.','ส.ค.',
