@@ -46,7 +46,7 @@ class Home extends CI_Controller {
 
 		$ipAddress = $_SERVER['REMOTE_ADDR'];		
 		$sql  = "select COUNT(*)AS ct FROM counter
-		WHERE ip ='$ipAddress' 
+		WHERE ip ='$ipAddress' and com_id ='$company->com_id'
 		and NOW() BETWEEN  dt and DATE_ADD(dt, INTERVAL 12 HOUR) ";		
 		$query = $this->db->query($sql);		
 		$x = $query->row(0);		
