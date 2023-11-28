@@ -7,6 +7,6 @@
 </head>
 <body>
     <h1>Hello blog 100</h1>
-    
+    <a href="2.php">link 2</a>
 </body>
 </html>
