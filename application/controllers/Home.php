@@ -222,10 +222,13 @@ class Home extends CI_Controller {
 		$cmd = "";
 		foreach($companys as $company){
 			$domain = $company->com_website;
-			$cmd .= "cd /home/brand100/domains/$domain/public_html<br>";
-			$cmd .= "rm -rf * <br>";
-			$cmd .= "git clone https://github.com/pongpet007/blog100.git /home/brand100/domains/$domain/public_html<br>";
-			$cmd .= "git config --global --add safe.directory /home/brand100/domains/$domain/public_html<br><br>";			
+			// $cmd .= "cd /home/brand100/domains/$domain/public_html<br>";
+			// $cmd .= "rm -rf * <br>";
+			// $cmd .= "git clone https://github.com/pongpet007/blog100.git /home/brand100/domains/$domain/public_html<br>";
+			// $cmd .= "git config --global --add safe.directory /home/brand100/domains/$domain/public_html<br><br>";	
+			
+			$cmd .= "cd /home/brand100/domains/aboutblog.in.th/public_html  && \\ <br>";
+			$cmd .= "git pull origin main <br><br>";
 		}
 		echo $cmd;
 	}
