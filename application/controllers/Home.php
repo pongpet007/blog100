@@ -233,7 +233,7 @@ class Home extends CI_Controller {
 			// $cmd .= "cd /home/brand100/domains/$domain/public_html  && \\ <br>";
 			// $cmd .= "git pull <br><br>";
 			
-			$cmd .= "$domain<br>";
+			$cmd .= "chown -R brand100:brand100 /home/brand100/domains/$domain <br>";
 
 
 		}
