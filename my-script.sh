@@ -1,2 +1,5 @@
 #!/bin/sh
-echo Hello World
+
+# echo "Hello World";
+
+git pull 2>&1
