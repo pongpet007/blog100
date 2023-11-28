@@ -349,7 +349,6 @@ class Home extends CI_Controller {
 		$data['m'] = $m;
 		$data['display'] = $display;
 		$data['mName'] = $mName;
-		$data['counter'] = $this->Counter_model->count();
 
 		/////////////////////// get products /////////////////////////////
 		
