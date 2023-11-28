@@ -13,7 +13,7 @@
     foreach($commands as $command){
         $tmp = shell_exec($command);
         // $tmp = exec($command);
-        $output .="<span style=\"color:black;\">\${$command}</span><br>";
+        $output .="<span style=\"color:black;\">\{$command}</span><br>";
         $output .= htmlentities(trim($tmp))."<br><br>";
     }
 
