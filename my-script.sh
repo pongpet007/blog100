@@ -1,5 +1,7 @@
 #!/bin/sh
 
-# echo "Hello World";
+cd /home/brand100/domains/aboutblog.in.th/public_html  && \
+git pull origin main
 
-git pull 2>&1
+cd /home/brand100/domains/bangkokclassified.in.th/public_html  && \
+git pull origin main
