@@ -34,7 +34,23 @@ class Home extends CI_Controller {
 		$domainname = $_SERVER['SERVER_NAME'];
 		
 		$data = array();
-		$company = $this->Company_model->getOneDomain($domainname);		
+		$company = $this->Company_model->getOneDomain($domainname);	
+		if (is_object($company) and $company->com_id > 0) {
+			$ipAddress = $_SERVER['REMOTE_ADDR'];		
+			$sql  = "select COUNT(*)AS ct FROM counter
+			WHERE ip ='$ipAddress' and com_id ='$company->com_id'
+			and NOW() BETWEEN  dt and DATE_ADD(dt, INTERVAL 12 HOUR) ";		
+			$query = $this->db->query($sql);		
+			$x = $query->row(0);		
+			if($x->ct==0 )
+			{	
+				$params = array();
+				$params['ip'] = $ipAddress;
+				$params['com_id'] = $company->com_id;
+				$params['dt'] = date('Y-m-d H:i:s');
+				$this->db->insert('counter',$params);			
+			}
+		}	
 		$data['companyData'] = $company;
 
 		$urlhome = $this->uri->segment(1);
@@ -45,20 +61,7 @@ class Home extends CI_Controller {
 			redirect($this->session->userdata('site_lang_name').'/home');
 		}
 
-		$ipAddress = $_SERVER['REMOTE_ADDR'];		
-		$sql  = "select COUNT(*)AS ct FROM counter
-		WHERE ip ='$ipAddress' and com_id ='$company->com_id'
-		and NOW() BETWEEN  dt and DATE_ADD(dt, INTERVAL 12 HOUR) ";		
-		$query = $this->db->query($sql);		
-		$x = $query->row(0);		
-		if($x->ct==0)
-		{	
-			// $params = array();
-			// $params['ip'] = $ipAddress;
-			// $params['com_id'] = $company->com_id;
-			// $params['dt'] = date('Y-m-d H:i:s');
-			// $this->db->insert('counter',$params);			
-		}
+		
 
 
 		$menu_id = "1";
