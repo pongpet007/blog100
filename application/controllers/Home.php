@@ -53,11 +53,11 @@ class Home extends CI_Controller {
 		$x = $query->row(0);		
 		if($x->ct==0)
 		{	
-			$params = array();
-			$params['ip'] = $ipAddress;
-			$params['com_id'] = $company->com_id;
-			$params['dt'] = date('Y-m-d H:i:s');
-			$this->db->insert('counter',$params);			
+			// $params = array();
+			// $params['ip'] = $ipAddress;
+			// $params['com_id'] = $company->com_id;
+			// $params['dt'] = date('Y-m-d H:i:s');
+			// $this->db->insert('counter',$params);			
 		}
 
 
