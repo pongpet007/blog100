@@ -2,7 +2,7 @@
 $json = json_decode($companyData->header_footer_json);    
     // print_r($json);
     // exit();
-    echo $companyData->packageBG;
+    // echo $companyData->packageBG;
 
 ?>
 <header class="header-position">
