@@ -46,6 +46,8 @@ class Products extends CI_Controller {
 		
 		$data["categorys"] = $this->Category_model->getAll();
 		$domainname = $_SERVER['SERVER_NAME'];
+		preg_match('/^(?:https?:\/\/)?(?:[^@\n]+@)?(?:www\.)?([^:\/\n?]+)/', $domainname , $matches);     
+  		$domainname = $matches[1];
 		$company = $this->Company_model->getOneDomain($domainname);		
 		$data['companyData'] = $company;
 		$data['counter'] = $this->Counter_model->count($company->com_id);		
@@ -391,6 +393,8 @@ class Products extends CI_Controller {
 		
 		$data["categorys"] = $this->Category_model->getAll();
 		$domainname = $_SERVER['SERVER_NAME'];
+		preg_match('/^(?:https?:\/\/)?(?:[^@\n]+@)?(?:www\.)?([^:\/\n?]+)/', $domainname , $matches);     
+  		$domainname = $matches[1];
 		$company = $this->Company_model->getOneDomain($domainname);			
 		$data['companyData'] = $company;
 		$data['counter'] = $this->Counter_model->count($company->com_id);

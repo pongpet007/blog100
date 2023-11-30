@@ -32,9 +32,11 @@ class Home extends CI_Controller {
 	public function index()
 	{	
 		$domainname = $_SERVER['SERVER_NAME'];
-		if (strstr($domainname, "www")) {
-			$domainname = str_replace("www.","",$domainname);
-		}
+		// if (strstr($domainname, "www")) {
+		// 	$domainname = str_replace("www.","",$domainname);
+		// }
+		preg_match('/^(?:https?:\/\/)?(?:[^@\n]+@)?(?:www\.)?([^:\/\n?]+)/', $domainname , $matches);     
+  		$domainname = $matches[1];
 		// echo $domainname;
 		//korn
 		$data = array();
@@ -282,6 +284,8 @@ class Home extends CI_Controller {
 		////////////////////// Theme ///////////////////////////////////
 
 		$domainname = $_SERVER['SERVER_NAME'];
+		preg_match('/^(?:https?:\/\/)?(?:[^@\n]+@)?(?:www\.)?([^:\/\n?]+)/', $domainname , $matches);     
+  		$domainname = $matches[1];
 		$company = $this->Company_model->getOneDomain($domainname);		
 		$data['companyData'] = $company;
 		$data['counter'] = $this->Counter_model->count($company->com_id);
