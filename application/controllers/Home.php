@@ -236,10 +236,10 @@ class Home extends CI_Controller {
 			// $cmd .= "cd /home/brand100/domains/$domain/public_html  && \\ <br>";
 			// $cmd .= "git pull <br><br>";
 
-			$cmd .= "cd /home/brand100/domains/$domain/public_html  && \\ <br>";
-			$cmd .= "git reset <br><br>";
+			// $cmd .= "cd /home/brand100/domains/$domain/public_html  && \\ <br>";
+			// $cmd .= "git restore ./ <br><br>";
 			
-			// $cmd .= "chown -R brand100:brand100 /home/brand100/domains/$domain <br>";
+			$cmd .= "chown -hR brand100:brand100 /home/brand100/domains/$domain <br>";
 			// $cmd .= "chmod -R 755 /home/brand100/domains/$domain <br>";
 
 
