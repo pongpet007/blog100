@@ -32,7 +32,7 @@ class Home extends CI_Controller {
 	public function index()
 	{	
 		$domainname = $_SERVER['SERVER_NAME'];
-		
+		//korn
 		$data = array();
 		$company = $this->Company_model->getOneDomain($domainname);	
 		if (is_object($company) and $company->com_id > 0) {
