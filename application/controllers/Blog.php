@@ -7,6 +7,7 @@ class Blog extends CI_Controller {
 		parent::__construct();
 
 		
+		
 		$this->load->model('Company_model');
 		$this->load->model('Category_model');	
 		$this->load->model('Country_model');	
