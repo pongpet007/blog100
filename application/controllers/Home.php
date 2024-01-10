@@ -36,27 +36,28 @@ class Home extends CI_Controller {
 		// 	$domainname = str_replace("www.","",$domainname);
 		// }
 		preg_match('/^(?:https?:\/\/)?(?:[^@\n]+@)?(?:www\.)?([^:\/\n?]+)/', $domainname , $matches);     
-  		$domainname = $matches[1];
+		$domainname = $matches[1];
 		// echo $domainname;
 		//korn
 		$data = array();
-		$company = $this->Company_model->getOneDomain($domainname);	
+		$company = $this->Company_model->getOneDomain($domainname);
+
 		if (is_object($company) and $company->com_id > 0) {
-			$ipAddress = $_SERVER['REMOTE_ADDR'];		
-			$sql  = "select COUNT(*)AS ct FROM counter
-			WHERE ip ='$ipAddress' and com_id ='$company->com_id'
-			and NOW() BETWEEN  dt and DATE_ADD(dt, INTERVAL 12 HOUR) ";		
-			$query = $this->db->query($sql);		
-			$x = $query->row(0);		
-			if($x->ct==0 )
-			{	
+
+			if(($this->session->userdata('viewed')=='')){
+
+				$ipAddress = $_SERVER['REMOTE_ADDR'];
 				$params = array();
-				$params['ip'] = $ipAddress;
 				$params['com_id'] = $company->com_id;
+				$params['ip'] = $ipAddress;
 				$params['dt'] = date('Y-m-d H:i:s');
-				$this->db->insert('counter',$params);			
+
+				$this->db->insert('counter',$params);
+
+				$this->session->set_userdata('viewed',1);
+				
 			}
-		}	
+		}
 		$data['companyData'] = $company;
 
 		$urlhome = $this->uri->segment(1);
@@ -96,7 +97,7 @@ class Home extends CI_Controller {
 		$get_subs =array();
 		$arr = array();
 		
-	
+
 		$orderby="`products`.`orders_index` asc";
 		
 		foreach ($categorys as $cat_all) {
@@ -188,34 +189,34 @@ class Home extends CI_Controller {
 		$tagss = $this->Products_model->getTags();
 
 		$arr = array();
-        $row = 0;
-        foreach ($tagss as $key => $new_tagss) {
-        	if(strstr($new_tagss->tags, ',')){
-                $keywords = explode(',', $new_tagss->tags);
+		$row = 0;
+		foreach ($tagss as $key => $new_tagss) {
+			if(strstr($new_tagss->tags, ',')){
+				$keywords = explode(',', $new_tagss->tags);
 
-                            $keywords2 = explode(',', $new_tagss->tags_url);
+				$keywords2 = explode(',', $new_tagss->tags_url);
                                             // print_r($keywords);
-                            for($i=0;$i< sizeof($keywords);$i++){
-                                $arr[$row][0] = trim($keywords[$i]);
-                                $arr[$row][1] = trim($keywords2[$i]);
-                                $row++;
-                            }
-                        }
-                        else{
+				for($i=0;$i< sizeof($keywords);$i++){
+					$arr[$row][0] = trim($keywords[$i]);
+					$arr[$row][1] = trim($keywords2[$i]);
+					$row++;
+				}
+			}
+			else{
 
-                            $arr[$row][0] = $new_tagss->tags;
-                            $arr[$row][1] = $new_tagss->tags_url;
-                            $row++;
-                        }           
-                        $newarr = array();
-                        for($x =0;$x< sizeof($arr);$x++){
-                            if(!in_array($arr[$x][1] , $newarr)){
-                                $newarr[$arr[$x][1]] =  $arr[$x][0];
-                            }
-                        }
-        }
-                        
-        $data['tags'] = $newarr;
+				$arr[$row][0] = $new_tagss->tags;
+				$arr[$row][1] = $new_tagss->tags_url;
+				$row++;
+			}           
+			$newarr = array();
+			for($x =0;$x< sizeof($arr);$x++){
+				if(!in_array($arr[$x][1] , $newarr)){
+					$newarr[$arr[$x][1]] =  $arr[$x][0];
+				}
+			}
+		}
+
+		$data['tags'] = $newarr;
 
 		/////////////////////// get products /////////////////////////////
 
@@ -285,7 +286,7 @@ class Home extends CI_Controller {
 
 		$domainname = $_SERVER['SERVER_NAME'];
 		preg_match('/^(?:https?:\/\/)?(?:[^@\n]+@)?(?:www\.)?([^:\/\n?]+)/', $domainname , $matches);     
-  		$domainname = $matches[1];
+		$domainname = $matches[1];
 		$company = $this->Company_model->getOneDomain($domainname);		
 		$data['companyData'] = $company;
 		$data['counter'] = $this->Counter_model->count($company->com_id);
@@ -306,12 +307,12 @@ class Home extends CI_Controller {
 		$data['countrys'] = $this->Country_model->getAll();
 		if ($this->session->userdata('site_lang_name') == "th") {
 			$mName = array('ม.ค.','ก.พ.','มี.ค.','เม.ย.',
-			'พ.ค.','มิ.ย.','ก.ค.','ส.ค.',
-			'ก.ย.','ต.ค.','พ.ย.','ธ.ค.');
+				'พ.ค.','มิ.ย.','ก.ค.','ส.ค.',
+				'ก.ย.','ต.ค.','พ.ย.','ธ.ค.');
 		}else {
 			$mName = array('Jan','Feb','Mar','Apr',
-			'May','Jun','Jul','Aug',
-			'Sep','Oct','Nov','Dec');
+				'May','Jun','Jul','Aug',
+				'Sep','Oct','Nov','Dec');
 		}
 		
 		$today = date('m-Y');
