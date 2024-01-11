@@ -44,6 +44,7 @@
             <th height="25" >
               <span class="">Banner </span> 
               <a href="<?php echo base_url('CompanyBanner/add/') ?>" class="btn btn-xs btn-success" target="_blanks"> Add Banner </a></th>     
+              <th>status</th> 
               <th>Position</th>      
               <th>Active</th>      
               <th width="100" class="">Action</th>
@@ -60,11 +61,17 @@
                   echo 'URL : '.$banner->link;
                   ?>
                 </td>  
-                <td align="left"><?php echo $banner->position; ?></td>         
+                <td align="left"><?php echo $banner->position; ?></td>
+                <td align="left"><?php if ($banner->start_date <= date('Y-m-d') and $banner->expire >= date('Y-m-d')) { ?>
+                  <p>Not Expired</p>
+                <? }else { ?>
+                  <p style="color: red;">Expired</p>
+                <? } ?></td>  
+
                 <td align="left"><?php echo $banner->is_active==1?'Yes':'No'; ?></td>                  
                 <td align="left">  
-                  <a class="btn btn-xs btn-warning" href="<?php echo base_url('CompanyBanner/edit/'.$banner->banner_id) ?>" target="_blank">edit</a>    
-                  <a href="<?php echo base_url('CompanyBanner/delete/'.$banner->banner_id ); ?>" class="btn btn-xs btn-danger" onClick="return confirm('Are you sure ? ');" target="_blank" > del</a>
+                  <a class="btn btn-xs btn-warning" href="<?php echo base_url('CompanyBanner/edit/'.$banner->banner_id) ?>" target="_blanks">edit</a>    
+                  <a href="<?php echo base_url('CompanyBanner/delete/'.$banner->banner_id ); ?>" class="btn btn-xs btn-danger" onClick="return confirm('Are you sure ? ');" target="_blanks" > del</a>
                   &nbsp;
                 </td>          
               </tr>      

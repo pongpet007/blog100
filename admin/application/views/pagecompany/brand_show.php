@@ -43,29 +43,28 @@
   
   
   <tr class="bg-info" >
-      <th width="250" class="">Action</th>
-      <td></td>
-      <th ><span class="">Brand </span></th>            
-               
-      <th >Active</th>            
-      <th ><span class=""></span></th>            
+      <th width="250" class="" style="text-align:center;">ACTION</th>
+      <td style="text-align:center;">IMAGE</td>
+      <th style="text-align:center;"><span class="">COMPANY NAME </span></th>            
+      <th style="text-align:center;">STATUS</th>         
+      <th style="text-align:center;">IS_ACTIVE</th>         
       
   </tr>
   <?php foreach ($brands as $brand) {  ?>
     <tr >
-      <td align="left">    
+      <td align="left" style="text-align:center;">    
         <a href="<?php echo base_url('CompanyBrand/edit/'.$brand->brand_id ); ?>" class="btn btn-sm btn-warning" target="_blank" > edit</a>
         <a href="<?php echo base_url('CompanyBrand/delete/'.$brand->brand_id ); ?>" class="btn btn-sm btn-danger" onClick="return confirm('Are you sure ? ');" target="_blank" > del</a>
         
         &nbsp;</td>     
-      <td>
+      <td style="text-align:center;">
         <?
           $filepath = "../images/brand/{$brand->brand_id}.jpg";
           if(is_file($filepath))
             echo '<img src="'.base_url($filepath).'?'.rand().'" class"img-responsive" style="max-width: 300px;">';
         ?>
       </td>
-      <td>
+      <td style="text-align:center;">
        <?php 
           
           foreach ($brand->languages as $language) {
@@ -74,14 +73,13 @@
             }  
         ?>
       </td>
-     
-      <td><?=$brand->is_active==1?'Yes':'No' ?></td> 
-      <td style="color: blue;">
-        cby : <?=$brand->cby ?><br>
-        cdate : <?=$brand->cdate ?><br>
-        uby : <?=$brand->uby ?><br>
-        udate : <?=$brand->udate ?><br>
-      </td> 
+      
+                      <td align="left" style="text-align:center;"><?php if ($brand->start_date <= date('Y-m-d') and $brand->end_date >= date('Y-m-d')) { ?>
+                          <p>Not Expired</p>
+                      <? }else { ?>
+                          <p style="color: red;">Expired</p>
+                          <? } ?></td>
+      <td style="text-align:center;"><?=$brand->is_active==1?'Yes':'No' ?></td> 
            
     </tr>      
   <? } ?>

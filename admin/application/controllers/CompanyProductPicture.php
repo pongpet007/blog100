@@ -135,7 +135,7 @@ class CompanyProductPicture extends CI_Controller {
 				$h=imagesy($imageTmp);
 
 				// resize image
-				$newsize = array("570","300","90"); 
+				$newsize = array("300"); 
 				foreach ($newsize as $key => $new_newsize) {
 					$new_w = $new_newsize;
 					$new_h = floor(($h * $new_newsize)/$w);
@@ -180,7 +180,10 @@ class CompanyProductPicture extends CI_Controller {
 			$config['password'] = 'Bra1212312121!@#$%^';
 			$config['debug']        = TRUE;
 
-			$domainsnow = $_SERVER['SERVER_NAME'];
+			$domainname = $_SERVER['SERVER_NAME'];
+        preg_match('/^(?:https?:\/\/)?(?:[^@\n]+@)?(?:www\.)?([^:\/\n?]+)/', $domainname , $matches);     
+		$domainsnow = $matches[1];
+			
 			$domainsold = $this->Company_model->getDomainbyALLS($domainsnow);
 
 			foreach ($domainsold as $key => $new_domains) {
@@ -340,7 +343,9 @@ class CompanyProductPicture extends CI_Controller {
 			$config['password'] = 'Bra1212312121!@#$%^';
 			$config['debug']        = TRUE;
 
-			$domainsnow = $_SERVER['SERVER_NAME'];
+			$domainname = $_SERVER['SERVER_NAME'];
+        preg_match('/^(?:https?:\/\/)?(?:[^@\n]+@)?(?:www\.)?([^:\/\n?]+)/', $domainname , $matches);     
+		$domainsnow = $matches[1];
 			$domainsold = $this->Company_model->getDomainbyALLS($domainsnow);
 
 			foreach ($domainsold as $key => $new_domains) {

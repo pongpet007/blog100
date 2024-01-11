@@ -63,7 +63,10 @@
                     ?>
                     <div class="col">
                         <div class="category-main">
+                            <a href="#">
+                            <?/*?>
                             <a href="<?php echo base_url(); ?><?=$this->session->userdata('site_lang_name');?>/products-category/<?php echo $categoryss->cat_url ?>">
+                                <?*/?>
                                 <?/*?><div class="category-icon">
                                     
                                 </div><?*/?>
@@ -333,7 +336,7 @@
             });
         </script>
     </div>
-
+    <?/*?>
     <div id="section4">
         <div class="container">
             <div class="row row-cols-lg-12 row-cols-sm-12 row-cols-12 g-3 g-xl-4">
@@ -380,9 +383,6 @@
                                             <?=$new_productsallnewCats->pro_name ?>
                                         </a>
                                     </h1>
-                                        <?/*?>
-                                        <div class="detail"><?=$new_productsallnewCats->pro_desc_short ?></div>
-                                        <?*/?>
                                         <a href="<? echo base_url($this->session->userdata('site_lang_name')); ?>/products-detail/<? echo $new_productsallnewCats->pro_url ?>">
                                             <h2 style="text-align: right;font-size: 16px;line-height: 30px;font-weight: 400;text-align: left;">ดูเพิ่มเติม</h2>
                                         </a>
@@ -473,6 +473,7 @@
             }
         </style>
     </div>
+    <?*/?>
 
     <div id="section5">
         <div class="container">
@@ -520,7 +521,7 @@
                 loop: true,
                 speed: 3000,
                 spaceBetween: 30,
-                slidesPerView: 4,
+                slidesPerView: 5,
                 navigation: {
                     nextEl: ".swiper-button-next-2",
                     prevEl: ".swiper-button-prev-2"

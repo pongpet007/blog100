@@ -47,7 +47,7 @@ class Products extends CI_Controller {
 		$data["categorys"] = $this->Category_model->getAll();
 		$domainname = $_SERVER['SERVER_NAME'];
 		preg_match('/^(?:https?:\/\/)?(?:[^@\n]+@)?(?:www\.)?([^:\/\n?]+)/', $domainname , $matches);     
-  		$domainname = $matches[1];
+		$domainname = $matches[1];
 		$company = $this->Company_model->getOneDomain($domainname);		
 		$data['companyData'] = $company;
 		$data['counter'] = $this->Counter_model->count($company->com_id);		
@@ -81,19 +81,6 @@ class Products extends CI_Controller {
 			$data['meta_keyword'] = $category_url->meta_keyword;
 			$data['meta_description'] = $category_url->meta_description;
 
-		}elseif ($langu == 2) {
-
-			$brand_url = $this->Brand_model->getBrandOne(rawurldecode($params));
-			$brand_id = $brand_url->brand_id;
-			if ($this->session->userdata('site_lang')!=236) {
-				$data['breadcrumb_name'] = "แบรนด์ : ".$brand_url->brand_name;
-			}else{
-				$data['breadcrumb_name'] = "brand : ".$brand_url->brand_name;
-			}
-			$data['breadcrumb'] = 2;
-			$data['meta_title'] = $brand_url->meta_title;
-			$data['meta_keyword'] = $brand_url->meta_keyword;
-			$data['meta_description'] = $brand_url->meta_description;
 		}elseif ($langu == 3){
 
 			$key_tag = rawurldecode($params);
@@ -180,39 +167,7 @@ class Products extends CI_Controller {
 		$search['promotion_id'] = $promotion_id;
 		$search['tag'] = $key_tag;
 
-		$tagss = $this->Products_model->getTags();
 		
-		// print_r($tagss);exit();
-
-		$arr = array();
-                        $row = 0;
-        foreach ($tagss as $key => $new_tagss) {
-        	if(strstr($new_tagss->tags, ',')){
-                $keywords = explode(',', $new_tagss->tags);
-
-                            $keywords2 = explode(',', $new_tagss->tags_url);
-                                            // print_r($keywords);
-                            for($i=0;$i< sizeof($keywords);$i++){
-                                $arr[$row][0] = trim($keywords[$i]);
-                                $arr[$row][1] = trim($keywords2[$i]);
-                                $row++;
-                            }
-                        }
-                        else{
-
-                            $arr[$row][0] = $new_tagss->tags;
-                            $arr[$row][1] = $new_tagss->tags_url;
-                            $row++;
-                        }           
-                        $newarr = array();
-                        for($x =0;$x< sizeof($arr);$x++){
-                            if(!in_array($arr[$x][1] , $newarr)){
-                                $newarr[$arr[$x][1]] =  $arr[$x][0];
-                            }
-                        }
-        }
-                        
-        $data['tags'] = $newarr;
         // print_r($data['tags']);exit();
 		// print_r($this->db->last_query());
 		// $arr = array();
@@ -338,8 +293,46 @@ class Products extends CI_Controller {
 			$config["uri_segment"] = 3;
 			$start = ($this->uri->segment(3)) ? $this->uri->segment(3) : 0;
 		}
+		$brand_active = $this->Brand_model->getAll();
+		foreach ($brand_active as $key => $new_brand_active) {
+			$search['brand_id'][] = $new_brand_active->brand_id;
+		}
+
+		$tagss = $this->Products_model->getTags($search,$company->com_id);
 		
-		$config["total_rows"] = $this->Products_model->record_count($search);
+		// print_r($tagss);exit();
+
+		$arr = array();
+		$row = 0;
+		foreach ($tagss as $key => $new_tagss) {
+			if(strstr($new_tagss->tags, ',')){
+				$keywords = explode(',', $new_tagss->tags);
+
+				$keywords2 = explode(',', $new_tagss->tags_url);
+                                            // print_r($keywords);
+				for($i=0;$i< sizeof($keywords);$i++){
+					$arr[$row][0] = trim($keywords[$i]);
+					$arr[$row][1] = trim($keywords2[$i]);
+					$row++;
+				}
+			}
+			else{
+
+				$arr[$row][0] = $new_tagss->tags;
+				$arr[$row][1] = $new_tagss->tags_url;
+				$row++;
+			}           
+			$newarr = array();
+			for($x =0;$x< sizeof($arr);$x++){
+				if(!in_array($arr[$x][1] , $newarr)){
+					$newarr[$arr[$x][1]] =  $arr[$x][0];
+				}
+			}
+		}
+		
+		$data['tags'] = $newarr;
+
+		$config["total_rows"] = $this->Products_model->record_count($search,$company->com_id);
 
 		// print_r($config["total_rows"]);
 		// exit();
@@ -362,7 +355,7 @@ class Products extends CI_Controller {
 
 		$data['brand'] = $this->Brand_model->getAll();
 		$orderby="`products`.`orders` asc";
-		$product = $this->Products_model->getAll($config["per_page"],$start,$search,$orderby);
+		$product = $this->Products_model->getAll($config["per_page"],$start,$search,$orderby,$company->com_id);
 		foreach ($product as $key => $new_product) {
 			$new_product->pictures = $this->Products_picture_model->getAll($new_product->pro_id);
 		}
@@ -394,7 +387,7 @@ class Products extends CI_Controller {
 		$data["categorys"] = $this->Category_model->getAll();
 		$domainname = $_SERVER['SERVER_NAME'];
 		preg_match('/^(?:https?:\/\/)?(?:[^@\n]+@)?(?:www\.)?([^:\/\n?]+)/', $domainname , $matches);     
-  		$domainname = $matches[1];
+		$domainname = $matches[1];
 		$company = $this->Company_model->getOneDomain($domainname);			
 		$data['companyData'] = $company;
 		$data['counter'] = $this->Counter_model->count($company->com_id);
@@ -448,9 +441,9 @@ class Products extends CI_Controller {
 		}
 		$data['realatedproductscount'] = $countrealatedproducts;
 		
-		$data['leftpro'] = $this->Products_model->getAll(20, 0,array(),'rand()');
+		$data['leftpro'] = $this->Products_model->getAll(20, 0,array(),'rand()',$company->com_id);
 		// print_r($data['leftpro']);exit();
-		$data['rightpro'] = $this->Products_model->getAll(20, 0,array(),'rand()');
+		$data['rightpro'] = $this->Products_model->getAll(20, 0,array(),'rand()',$company->com_id);
 
 		
 

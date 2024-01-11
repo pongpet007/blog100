@@ -8,6 +8,9 @@ class Brand_model extends CI_Model{
 		$this->db->from('company_brand')
 			 ->join('company_brand_language','company_brand.brand_id=company_brand_language.brand_id');	
 
+		$this->db->where('company_brand.start_date <=', date('Y-m-d'));
+		$this->db->where('company_brand.end_date >=', date('Y-m-d'));
+		
 		if($this->session->userdata('site_lang')){
 			$this->db->where('company_brand_language.country_id', $this->session->userdata('site_lang'));
 		}

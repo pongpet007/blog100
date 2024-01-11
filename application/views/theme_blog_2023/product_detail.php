@@ -91,9 +91,11 @@
                     <div class="article-desc">
                         <?=$product->pro_desc_long ?>
                     </div>
+                    <?/*?>
                     <div class="article-link">
                         <a href="<?=$category->product_link_social ?>">CONTACT LINK</a>
                     </div>
+                    <?*/?>
 
                 </div>
 

@@ -172,6 +172,7 @@
                           }  
                           ?>
                       </td>
+
                       <td><?=$product->is_active==1?'Yes':'No' ?></td>              
 
                   </tr>

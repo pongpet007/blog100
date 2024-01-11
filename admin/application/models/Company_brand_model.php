@@ -6,7 +6,7 @@ class Company_brand_model extends CI_Model{
 	public function getAll($com_id){
 		$this->db->select("company_brand.*,brand_name");
 		$this->db->from('company_brand')
-				 ->join('company_brand_language','company_brand.brand_id=company_brand_language.brand_id and company_brand_language.country_id=236','left')	;
+				 ->join('company_brand_language','company_brand.brand_id=company_brand_language.brand_id and company_brand_language.country_id=221','left')	;
 		$this->db->where('com_id',$com_id);		
 		$query = $this->db->get();
 		return $query->result();

@@ -1,7 +1,7 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class CompanyBrand extends CI_Controller {
+class CompanyName extends CI_Controller {
 
 
 	function __construct(){
@@ -135,14 +135,9 @@ class CompanyBrand extends CI_Controller {
 
 			
 				$is_active = $this->input->post('is_active');
-				$position = $this->input->post('position');	
-
-				$start_date = $this->input->post('start_date');
-				$end_date = $this->input->post('end_date');				
+				$position = $this->input->post('position');				
 				$params = array('position'=>$position,
-								'is_active'=>$is_active,
-								'start_date'=>$start_date,
-								'end_date'=>$end_date,							
+								'is_active'=>$is_active,							
 								'uby'=>$this->session->userdata('ssfullname'),
 								'udate'=> date('Y-m-d H:i:s') );
 

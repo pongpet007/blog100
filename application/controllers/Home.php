@@ -43,21 +43,22 @@ class Home extends CI_Controller {
 		$company = $this->Company_model->getOneDomain($domainname);
 
 		if (is_object($company) and $company->com_id > 0) {
-
-			if(($this->session->userdata('viewed')=='')){
+			// ปรับใหม่วันที่ 10/1/2024
+			if(!($this->session->has_userdata('viewed'))){
 
 				$ipAddress = $_SERVER['REMOTE_ADDR'];
 				$params = array();
 				$params['com_id'] = $company->com_id;
 				$params['ip'] = $ipAddress;
 				$params['dt'] = date('Y-m-d H:i:s');
-
 				$this->db->insert('counter',$params);
-
-				$this->session->set_userdata('viewed',1);
+				$this->session->set_userdata('viewed',1);				
 				
 			}
 		}
+		
+		// print_r($_SESSION);
+
 		$data['companyData'] = $company;
 
 		$urlhome = $this->uri->segment(1);
@@ -140,14 +141,6 @@ class Home extends CI_Controller {
 		// print_r($this->db->last_query());
 		// exit();
 		##################################################################
-		$productsnew  = $this->Products_model->getAll(8,0,$search,$orderby);
-		// print_r($this->db->last_query());exit();
-		foreach ($productsnew as $key => $new_productsnew) {
-			$new_productsnew->pictures = $this->Products_picture_model->getAll($new_productsnew->pro_id);
-		}
-
-		$data['productsnew']  = $productsnew;
-
 
 		$bannermaintype = '1';
 		$banneradstype = '2';
@@ -155,11 +148,17 @@ class Home extends CI_Controller {
 		// $getbanner_id = 
 
 		$data['bannermain']  = $this->Banner_model->getAllHomePage($company->com_id,$bannermaintype);
+		// print_r($this->db->last_query());exit();
 		$data['bannerads']  = $this->Banner_model->getAllHomePage($company->com_id,$banneradstype);
 		// print_r($data['bannerads']);exit();
 		// print_r($this->db->last_query());exit();
+		// $brand_id = array();
+		$brand_active = $this->Brand_model->getAll();
+		foreach ($brand_active as $key => $new_brand_active) {
+			$search['brand_id'][] = $new_brand_active->brand_id;
+		}
 
-		$productsallnew  = $this->Products_model->getAllNew(12,0,$company->com_id);
+		$productsallnew  = $this->Products_model->getAllNew(12,0,$company->com_id,$search);
 		// print_r($this->db->last_query());exit();
 		foreach ($productsallnew as $key => $new_productsallnew) {
 			$new_productsallnew->pictures = $this->Products_picture_model->getAll($new_productsallnew->pro_id);
@@ -186,7 +185,7 @@ class Home extends CI_Controller {
 		// print_r($data['productsallnew']);exit();
 		$data['splash'] = $this->Company_splash_model->getActive();
 
-		$tagss = $this->Products_model->getTags();
+		$tagss = $this->Products_model->getTags($search,$company->com_id);
 
 		$arr = array();
 		$row = 0;

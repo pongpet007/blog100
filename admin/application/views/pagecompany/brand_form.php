@@ -53,7 +53,7 @@
 			<?php } ?>
 
     <?php 
-      $attributes = array('id' =>'frm' , 'class'=>'form-horizontal' , 'name'=>'frm' );  
+      $attributes = array('id' =>'frm' , 'class'=>'form-horizontal' , 'name'=>'frm');  
       echo form_open_multipart("CompanyBrand/$method/$brand_id",$attributes); ?>
           <div class="form-group">
             <label class="col-md-2 control-label" for="">Brand picture (165 x 55)</label>
@@ -107,6 +107,42 @@
                       echo form_input($data); ?>
                   </div>
                 </div>
+
+                <div class="form-group">
+              <label class="col-md-2 control-label" for="">START DATE</label>
+              <div class="col-md-6 ">
+                <?php 
+                  $start_date = is_object($brand)?$brand->start_date:'';
+                  $data = array(
+                      'class' =>'form-control datepicker' ,
+                      'name' =>'start_date',
+                      'id'=>'start_date',
+                      'placeholder' => 'start_date' ,
+                      'data-date-format'=>'yyyy-mm-dd',
+                      'autocomplete'=>'off',
+                      'value' => set_value('start_date')?set_value('start_date'):$start_date,
+                  );
+                  echo form_input($data); ?>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label class="col-md-2 control-label" for="">END DATE</label>
+              <div class="col-md-6 ">
+                <?php 
+                  $end_date = is_object($brand)?$brand->end_date:'';
+                  $data = array(
+                      'class' =>'form-control datepicker' ,
+                      'name' =>'end_date',
+                      'id'=>'end_date',
+                      'placeholder' => 'end_date' ,
+                      'data-date-format'=>'yyyy-mm-dd',
+                      'autocomplete'=>'off',
+                      'value' => set_value('end_date')?set_value('end_date'):$end_date,
+                  );
+                  echo form_input($data); ?>
+              </div>
+            </div>
 
           <div class="form-group">
             <label class="col-md-2 control-label" for="">IS Active</label>

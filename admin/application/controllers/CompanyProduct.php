@@ -95,7 +95,6 @@ class CompanyProduct extends CI_Controller {
 
 		$arr = array('-- Brand --');
 		foreach ($brands as $brand) {
-
 			$arr[$brand->brand_id] = $brand->brand_name;
 		}
 		
@@ -377,6 +376,9 @@ class CompanyProduct extends CI_Controller {
 				$is_deal = $this->input->post('is_deal');
 				$deal_expire = $this->input->post('deal_expire');
 				$pro_price_old = $this->input->post('pro_price_old');
+
+				$start_date = $this->input->post('start_date');
+				$end_date = $this->input->post('end_date');
 				
 				$pro_url = str_replace(" ","-",strtolower($this->input->post('pro_url')));
 				$pro_url = str_replace("×","-",$pro_url);
@@ -401,7 +403,9 @@ class CompanyProduct extends CI_Controller {
 								'is_new'=>$is_new,	
 								'is_deal'=>$is_deal,	
 								'deal_expire'=>$deal_expire,	
-								'pro_price_old'=>$pro_price_old,	
+								'pro_price_old'=>$pro_price_old,
+								'start_date'=>$start_date,	
+								'end_date'=>$end_date,	
 								'udate'=>date('Y-m-d h:i:s'),
 								'uby'=>$this->session->userdata('ssfullname')							
 								);

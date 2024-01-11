@@ -41,6 +41,9 @@
         $attributes = array('id' =>'frm' , 'class'=>'form-horizontal' ,'onsubmit'=>'return sendProductForm()' , 'name'=>'frm' );  
         echo form_open_multipart("CompanyProduct/$method/$com_id/$pro_id",$attributes); ?>
       <div>
+
+        
+
         <!-- Nav tabs -->
         <ul class="nav nav-tabs" role="tablist">
           <li role="presentation" class="active"><a href="#tab1" aria-controls="tab1" role="tab" data-toggle="tab">Picture</a></li>
@@ -497,7 +500,7 @@
                   ?>
               </div>
             </div>
-            <div class="form-group" style="display: none;">
+            <div class="form-group">
               <label class="col-md-2 control-label" for="">Brand</label>
               <div class="col-md-6">
                 <?php 
@@ -615,6 +618,40 @@
                       'placeholder' => 'deal_expire' ,
                       'data-date-format'=>'yyyy-mm-dd',
                       'value' => set_value('deal_expire')?set_value('deal_expire'):$deal_expire,
+                  );
+                  echo form_input($data); ?>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="col-md-2 control-label" for="">START DATE</label>
+              <div class="col-md-6 ">
+                <?php 
+                  $start_date = is_object($product)?$product->start_date:'';
+                  $data = array(
+                      'class' =>'form-control datepicker' ,
+                      'name' =>'start_date',
+                      'id'=>'start_date',
+                      'placeholder' => 'start_date' ,
+                      'data-date-format'=>'yyyy-mm-dd',
+                      'value' => set_value('start_date')?set_value('start_date'):$start_date,
+                  );
+                  echo form_input($data); ?>
+              </div>
+            </div>
+            
+            <div class="form-group">
+              <label class="col-md-2 control-label" for="">END DATE</label>
+              <div class="col-md-6 ">
+                <?php 
+                  $end_date = is_object($product)?$product->end_date:'';
+                  $data = array(
+                      'class' =>'form-control datepicker' ,
+                      'name' =>'end_date',
+                      'id'=>'end_date',
+                      'placeholder' => 'end_date' ,
+                      'data-date-format'=>'yyyy-mm-dd',
+                      'value' => set_value('end_date')?set_value('end_date'):$end_date,
                   );
                   echo form_input($data); ?>
               </div>

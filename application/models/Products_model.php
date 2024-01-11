@@ -2,7 +2,7 @@
 
 class Products_model extends CI_Model{
 
-	public function getAllNew($limit, $start,$com_id)
+	public function getAllNew($limit, $start,$com_id,$search=array())
 	{
 
 		// $this->db->select('products.*,products_language.*,cat_name');
@@ -11,6 +11,10 @@ class Products_model extends CI_Model{
 		->join('products_language','products.pro_id = products_language.pro_id ','left');
 
 		$this->db->where("domainandproduct.domain_id ", $com_id);	
+
+		if(isset($search['brand_id']) and count($search['brand_id']) > 0 ){
+			$this->db->where_in('products.brand_id', $search['brand_id']);					
+		}
 
 		$this->db->order_by('products.pro_id desc');
 
@@ -37,6 +41,8 @@ class Products_model extends CI_Model{
 		$this->db->where("products.cat_id ", $cat_id);	
 		$this->db->where("domainandproduct.domain_id ", $com_id);	
 
+
+		
 		if($this->session->userdata('site_lang')){
 			$this->db->where('products_language.country_id', $this->session->userdata('site_lang'));
 		}
@@ -52,14 +58,18 @@ class Products_model extends CI_Model{
 		return $query->result();
 	}
 
-	public function getAll($limit, $start,$search = array() , $orderby='')
+	public function getAll($limit, $start,$search = array() , $orderby='',$com_id)
 	{
 
 		// $this->db->select('products.*,products_language.*,cat_name');
 		$this->db->from('products')
+		->join('domainandproduct','products.pro_id = domainandproduct.pro_id ','left')
 		->join('products_language','products.pro_id = products_language.pro_id ','left')
 		->join('company_category','products.cat_id=company_category.cat_id','left')
 		->join('company_category_language','company_category.cat_id = company_category_language.cat_id ','left');
+
+
+		$this->db->where("domainandproduct.domain_id ", $com_id);	
 
 		if(isset($search['brand_id']) and count($search['brand_id']) > 0 ){
 			$this->db->where_in('products.brand_id', $search['brand_id']);					
@@ -157,33 +167,52 @@ class Products_model extends CI_Model{
 
 	
 
-	public function record_count($search = array())
+	public function record_count($search = array(), $com_id)
 	{
 		$this->db->from('products')
-		->join('products_language','products.pro_id = products_language.pro_id ','left');
+		->join('domainandproduct','products.pro_id = domainandproduct.pro_id ','left')
+		->join('products_language','products.pro_id = products_language.pro_id ','left')
+		->join('company_category','products.cat_id=company_category.cat_id','left')
+		->join('company_category_language','company_category.cat_id = company_category_language.cat_id ','left');
 
-		if(isset($search['keyword'])){
-			$this->db->like('pro_name', $search['keyword']);
+
+		$this->db->where("domainandproduct.domain_id ", $com_id);	
+
+		if(isset($search['brand_id']) and count($search['brand_id']) > 0 ){
+			$this->db->where_in('products.brand_id', $search['brand_id']);					
 		}
 
-		if(isset($search['tag']) && $search['tag']!=''){
-			$this->db->where(" ( tags like '%$search[tag]%' ) " );	
+		if(isset($search['keyword'])){
+			$this->db->like('products_language.pro_name', $search['keyword']);		
 		}
 
 		if(isset($search['cat_id']) and count($search['cat_id']) > 0 ){
-			$this->db->where_in('cat_id', $search['cat_id']);
-		}
-		if(isset($search['promotion_id']) and count($search['promotion_id']) > 0 ){
-			$this->db->where_in('promotion_id', $search['promotion_id']);
+			$this->db->where_in('products.cat_id', $search['cat_id']);					
 		}
 
-		$this->db->where('show_index', 2);
+		if(isset($search['tag']) && $search['tag']!=''){
+			$this->db->where("products_language.tags_url like '%$search[tag]%' " );	
+		}
+
+		if(isset($search['promotion_id']) and count($search['promotion_id']) > 0 ){
+			$this->db->where_in('promotion_id', $search['promotion_id']);					
+		}
+
+		if(isset($search['show_index']) and count($search['show_index']) > 0 ){
+			$this->db->where_in('show_index', $search['show_index']);					
+		}		
+		
+		if($orderby){
+			$this->db->order_by($orderby);
+		}	
 
 		if($this->session->userdata('site_lang')){
-			$this->db->where('products_language.country_id', $this->session->userdata('site_lang'));		
+			$this->db->where('products_language.country_id', $this->session->userdata('site_lang'));
+			$this->db->where('company_category_language.country_id', $this->session->userdata('site_lang'));
 		}
 		else{
 			$this->db->where('products_language.country_id', '221');
+			$this->db->where('company_category_language.country_id', '221');
 		}
 		
 		return $this->db->count_all_results();
@@ -221,12 +250,20 @@ class Products_model extends CI_Model{
 		}
 	}
 
-	public function getTags()
+	public function getTags($search=array(),$com_id)
 	{
 
 		$this->db->select('tags, tags_url');
 		$this->db->from('products')
+		->join('domainandproduct','products.pro_id = domainandproduct.pro_id ','left')
 		->join('products_language','products.pro_id=products_language.pro_id','left');		
+
+		$this->db->where("domainandproduct.domain_id ", $com_id);
+
+		if(isset($search['brand_id']) and count($search['brand_id']) > 0 ){
+			$this->db->where_in('products.brand_id', $search['brand_id']);					
+		}
+		
 		$this->db->order_by('products.pro_id','RANDOM');
 		$this->db->where('products.is_active',1);	
 		$this->db->where(" products_language.tags <> '' ");

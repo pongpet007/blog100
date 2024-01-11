@@ -11,6 +11,9 @@ class Banner_model extends CI_Model{
 		$this->db->where('domainandbanner.domain_id',$domain_id);
 		$this->db->where('banner.banner_type',$id);
 
+		$this->db->where('start_date <=', date('Y-m-d'));
+		$this->db->where('expire >=', date('Y-m-d'));
+
 		$this->db->order_by('position', 'asc');
 		
 		$query = $this->db->get();

@@ -103,10 +103,14 @@ class CompanyBanner extends CI_Controller {
 			$com_website = $this->input->post('com_website');
 			$banner_type = $this->input->post('banner_type');
 
+			$start_date = $this->input->post('start_date');
+			$expire = $this->input->post('expire');
+
 			$link = $this->input->post('link');
 			$position = $this->input->post('position');
 			$is_active = $this->input->post('is_active');
-			
+			// print_r($start_date);
+			// print_r($expire);exit();
 			if ($allcheckbox == "1") {
 
 				
@@ -154,7 +158,9 @@ class CompanyBanner extends CI_Controller {
 			$params = array('link'=>$link,	
 				'position'=>$position,
 				'banner_type'=>$banner_type,								
-				'is_active'=>$is_active,								
+				'is_active'=>$is_active,
+				'start_date'=>$start_date,								
+				'expire'=>$expire,								
 				'uby'=>$this->session->userdata('ssfullname'),
 				'udate'=> date('Y-m-d H:i:s') );
 
@@ -222,6 +228,7 @@ class CompanyBanner extends CI_Controller {
 					$destination = $folder.$filename.'.jpg';
 		    		imagejpeg($dst_img, $destination, 100);
 				}
+
 				// converter webp
 				// $webp=imagecreatetruecolor($w,$h);
 				// $backgroundColor = imagecolorallocatealpha($webp, 0, 0, 0, 127);
@@ -238,7 +245,7 @@ class CompanyBanner extends CI_Controller {
 				imagefill($webpmobile, 0, 0, $backgroundColor);
 				imagecopy($webpmobile,$jpgmobile, 0, 0, 0, 0,$wmobile,$hmobile);
 				imagewebp($webpmobile, "../images/banner/{$banner_id}_mobile.webp", 100);
-
+				// exit();
 				imagedestroy($imageTmp);
 				// imagedestroy($webp);
 				imagedestroy($jpgmobile);
@@ -260,9 +267,11 @@ class CompanyBanner extends CI_Controller {
         $config['password'] = 'Bra1212312121!@#$%^';
         $config['debug']        = TRUE;
         
-        $domainsnow = $_SERVER['SERVER_NAME'];
+        $domainname = $_SERVER['SERVER_NAME'];
+        preg_match('/^(?:https?:\/\/)?(?:[^@\n]+@)?(?:www\.)?([^:\/\n?]+)/', $domainname , $matches);     
+		$domainsnow = $matches[1];
         $domainsold = $this->Company_model->getDomainbyALLS($domainsnow);
-
+        // print_r($this->db->last_query());exit();
         foreach ($domainsold as $key => $new_domains) {
         	$domains[] = $new_domains->com_website;
         }
