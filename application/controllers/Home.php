@@ -42,20 +42,20 @@ class Home extends CI_Controller {
 		$data = array();
 		$company = $this->Company_model->getOneDomain($domainname);
 
-		if (is_object($company) and $company->com_id > 0) {
-			// ปรับใหม่วันที่ 10/1/2024
-			if(!($this->session->has_userdata('viewed'))){
+		// if (is_object($company) and $company->com_id > 0) {
+		// 	// ปรับใหม่วันที่ 10/1/2024
+		// 	if(!($this->session->has_userdata('viewed'))){
 
-				$ipAddress = $_SERVER['REMOTE_ADDR'];
-				$params = array();
-				$params['com_id'] = $company->com_id;
-				$params['ip'] = $ipAddress;
-				$params['dt'] = date('Y-m-d H:i:s');
-				$this->db->insert('counter',$params);
-				$this->session->set_userdata('viewed',1);				
+		// 		$ipAddress = $_SERVER['REMOTE_ADDR'];
+		// 		$params = array();
+		// 		$params['com_id'] = $company->com_id;
+		// 		$params['ip'] = $ipAddress;
+		// 		$params['dt'] = date('Y-m-d H:i:s');
+		// 		$this->db->insert('counter',$params);
+		// 		$this->session->set_userdata('viewed',1);				
 				
-			}
-		}
+		// 	}
+		// }
 		
 		// print_r($_SESSION);
 

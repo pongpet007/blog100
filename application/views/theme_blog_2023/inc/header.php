@@ -21,11 +21,12 @@ $json = json_decode($companyData->header_footer_json);
                                 <?php } ?>
                             </ul>
                         </li>
+                        <?/*?>
                         <li class="header_top_left_one">
                             <a class="total-visitor" href="<?php echo base_url($this->session->userdata('site_lang_name')."/home/stat") ?>">
                                 <?=lang('Number of website visitors') ?> <? echo $counter; ?></a>
                             </li>
-
+    <?*/?>
                         </ul>
                     </div>
                     <div class="col-md-6">
