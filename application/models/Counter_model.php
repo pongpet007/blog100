@@ -6,10 +6,11 @@ class Counter_model extends CI_Model{
 	
 	public function count($com_id){
 		
-		$this->db->from('counter');
-		$this->db->where('com_id',$com_id);		
+		// $this->db->from('counter');
+		// $this->db->where('com_id',$com_id);		
 
-        return $this->db->count_all_results();	
+        // return $this->db->count_all_results();	
+        return FALSE;
 
 	}	
 
