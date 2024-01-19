@@ -216,7 +216,8 @@ class Home extends CI_Controller {
 		}
 
 		$data['tags'] = $newarr;
-
+		$data["news"] = $this->News_model->getAll(12,0);
+		// print_r($data["news"]);exit();
 		/////////////////////// get products /////////////////////////////
 
 		$this->load->view('theme_blog_2023/index',$data);	

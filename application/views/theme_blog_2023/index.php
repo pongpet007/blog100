@@ -32,18 +32,18 @@
         </div>
     </div>
     <script type="text/javascript">
-            var swiper = new Swiper(".mySwiperssBanner", {
-                loop: true,
-                speed: 3000,
-                autoHeight: true,
-                spaceBetween: 30,
-                slidesPerView: 1,
-                autoplay: {
-                    delay: 2500,
-                    disableOnInteraction: false
-                },
-            });
-        </script>
+        var swiper = new Swiper(".mySwiperssBanner", {
+            loop: true,
+            speed: 3000,
+            autoHeight: true,
+            spaceBetween: 30,
+            slidesPerView: 1,
+            autoplay: {
+                delay: 2500,
+                disableOnInteraction: false
+            },
+        });
+    </script>
     <div id="section1">
         <div class="container">
             <div class="row">
@@ -66,7 +66,7 @@
                             <a href="#">
                             <?/*?>
                             <a href="<?php echo base_url(); ?><?=$this->session->userdata('site_lang_name');?>/products-category/<?php echo $categoryss->cat_url ?>">
-                                <?*/?>
+                            <?*/?>
                                 <?/*?><div class="category-icon">
                                     
                                 </div><?*/?>
@@ -265,7 +265,25 @@
         </script>
     </div>
 
+    <div id="section3">
+        <div class="container-fluid">
+            <div class="row">
+                <?php foreach ($bannerads as $key => $new_bannerads) { ?>
+                    <?php $filepath = "images/banner/".$new_bannerads->banner_id.'_mobile.webp'; ?>
+                    <? if(is_file($filepath)) { ?>
+                        <div class="col-lg-3">
+                            <a href="#">
+                                <img src="<?php echo base_url($filepath); ?>" style="width: 100%;" alt="">
+                            </a>
+                        </div>
+                    <? } ?>
+                <?php } ?>
 
+            </div>
+        </div>
+    </div>
+
+    <?/*?>
     <div id="section3">
         <div class="container-fluid">
             <div class="row">
@@ -336,6 +354,7 @@
             });
         </script>
     </div>
+    <?*/?>
     <?/*?>
     <div id="section4">
         <div class="container">
@@ -487,7 +506,7 @@
                     <div class="swiper swiperbrand">
                         <div class="swiper-wrapper">
                             <?php foreach ($brand as $new_brand) { ?>
-                                <div class="swiper-slide">
+                                <div class="swiper-slide swiper-brands ">
                                     <div class="" style="">
                                         <a href="<?=$new_brand->brand_url?>">
                                             <img src="<?php echo base_url() ?>images/brand/<?php echo $new_brand->brand_id ?>.jpg?<?=rand()?>" alt="<?=$new_brand->brand_name ?>" style="width: 100%;">
@@ -514,14 +533,20 @@
                 <?=$companyData->packageBG?'color: '.$companyData->packageBG.' !important;':''?>;
                 margin-bottom: 30px;
             }
+            #section5 .swiper-brands {
+                box-shadow: 0 0.125rem 0.125rem -0.125rem rgba(31,27,45,.08), 0 0.25rem 0.75rem rgba(31,27,45,.08);
+                transition: border-color .2s ease-in-out,background-color .2s ease-in-out,box-shadow .2s ease-in-out !important;
+                border: 1px solid #EEE;
+
+            }
         </style>
         <script>
 
             var swiper5 = new Swiper(".swiperbrand", {
                 loop: true,
                 speed: 3000,
-                spaceBetween: 30,
-                slidesPerView: 5,
+                spaceBetween: 15,
+                slidesPerView: 10,
                 navigation: {
                     nextEl: ".swiper-button-next-2",
                     prevEl: ".swiper-button-prev-2"
@@ -610,6 +635,123 @@
                 min-height: 450px;
             }
         </style>
+    </div>
+
+    <div id="section7">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="title">
+                        <h1>เว็บไซต์พันธมิตร</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-12 pd-mySwiper">
+                    <div class="swiper mySwipersparter">
+                        <div class="swiper-wrapper">
+                            <?php foreach ($news as $key => $new_news) { ?>
+                                <div class="swiper-slide swiper-product">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <img src="<?=base_url()?>images/news/<?=$new_news->news_id?>.jpg" style="max-width: 100%;">
+                                        </div>
+                                    </div>
+                                </div>
+                            <?php } ?>
+
+
+
+                        </div>
+                        
+                        <?/*?><div class="swiper-pagination"></div><?*/?>
+                    </div>
+                    <?/*?>
+                        <div class="swiper-button-next swiper-button-next-1"></div>
+                        <div class="swiper-button-prev swiper-button-prev-1"></div>
+                        <?*/?>
+                    </div>
+                </div>
+            </div>
+            <style type="text/css">
+            /*.swiper-button-prev-1 {
+                left: var(--swiper-navigation-sides-offset,-25px);
+            }
+            .swiper-button-next-1 {
+                right: var(--swiper-navigation-sides-offset,-25px);
+            }*/
+            #section7 {
+                padding: 30px 0;
+            }
+            #section7 .title h1 {
+                text-align: left;font-size: 32px;font-weight: bold;<?=$companyData->packageBG?'color: '.$companyData->packageBG.' !important;':''?>;margin-bottom: 30px;
+            }
+            .autoplay-progress {
+                position: absolute;right: 16px;bottom: 16px;z-index: 10;width: 48px;height: 48px;display: flex;align-items: center;justify-content: center;font-weight: bold;color: var(--swiper-theme-color);
+            }
+            .autoplay-progress svg {
+                --progress: 0;position: absolute;left: 0;top: 0px;z-index: 10;width: 100%;height: 100%;stroke-width: 4px;stroke: var(--swiper-theme-color);fill: none;stroke-dashoffset: calc(125.6 * (1 - var(--progress)));stroke-dasharray: 125.6;transform: rotate(-90deg);
+            }
+            #section7 .swiper-product {
+                box-shadow: 0 0.125rem 0.125rem -0.125rem rgba(31,27,45,.08), 0 0.25rem 0.75rem rgba(31,27,45,.08);transition: border-color .2s ease-in-out,background-color .2s ease-in-out,box-shadow .2s ease-in-out !important;border: 1px solid #EEE;
+            }
+            #section7 .swiper-product .image-product {
+                padding: 10px;
+            }
+            #section7 .swiper-product .product-detail {
+                padding: 10px;
+            }
+            #section7 .swiper-product .product-detail h1 {
+                margin: 15px 0;font-size: 20px;line-height: 30px;font-weight: 500;text-align: left;color: #000;
+            }
+            #section7 .swiper-product .product-detail h1 a {
+                text-decoration: unset;color: unset;
+            }
+            #section7 .swiper-product .product-detail .detail {
+                height: 90px;overflow: hidden;
+            }
+            #section7 .swiper-product .product-detail p {
+                font-size: 16px;line-height: 30px;font-weight: 400;text-align: left;color: #000;
+            }
+            #section7 .swiper-product .product-detail a {
+                text-decoration: unset;color: unset;
+            }
+            #section7 .swiper-product .product-detail a h2 {
+                margin: 15px 0;font-size: 16px;line-height: 30px;font-weight: 500;text-align: left;color: #000;
+            }
+            #section7 .swiper-product:hover {
+                box-shadow: 0 0.125rem 0.5rem -0.25rem rgba(31,27,45,.12), 0 0.25rem 1rem rgba(31,27,45,.12) !important;
+            }
+            #section7 .swiper-product:hover h1 a:hover {
+                <?=$companyData->packageBG?'color: '.$companyData->packageBG.' !important;':''?>;
+            }
+            #section7 .swiper-product:hover a:hover h2 {
+                <?=$companyData->packageBG?'color: '.$companyData->packageBG.' !important;':''?>;
+            }
+            .pd-mySwiper {
+                position: relative;
+            }
+        </style>
+        <script type="text/javascript">
+            var swiper = new Swiper(".mySwipersparter", {
+                loop: true,
+                speed: 3000,
+                spaceBetween: 30,
+                slidesPerView: 4,
+                autoplay: {
+                    delay: 2500,
+                    disableOnInteraction: false
+                },
+                pagination: {
+                    el: ".swiper-pagination",
+                    clickable: true
+                },
+                navigation: {
+                    nextEl: ".swiper-button-next-1",
+                    prevEl: ".swiper-button-prev-1"
+                },
+            });
+        </script>
     </div>
     <?php $this->load->view('theme_blog_2023/inc/footer') ?>
     <?php $this->load->view('theme_blog_2023/inc/footer_js') ?>

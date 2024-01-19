@@ -35,6 +35,7 @@ $json = json_decode($companyData->header_footer_json);
                 </div>
             </div>
         </div>
+        <?/*?>
         <div class="header_middle" style="<?=$json->header_middle_bg_color?'background-color: '.$json->header_middle_bg_color.' ;':''?>border-bottom: 1px solid #eee;">
             <div class="container">
                 <div class="row" style="align-items: center;">
@@ -49,6 +50,7 @@ $json = json_decode($companyData->header_footer_json);
                 </div>
             </div>
         </div>
+        <?*/?>
 
 
     </header>

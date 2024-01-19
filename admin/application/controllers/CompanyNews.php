@@ -157,7 +157,49 @@ class CompanyNews extends CI_Controller {
 				move_uploaded_file($_FILES['picture']['tmp_name'], $filepath);
 			}
 				
+			if ($_FILES['picture']['size']>0) {
+				$this->load->library('ftp');
 
+				$config['hostname'] = '27.254.96.231';
+				$config['username'] = 'brand100';
+				$config['password'] = 'Bra1212312121!@#$%^';
+				$config['debug']        = TRUE;
+
+				$domainname = $_SERVER['SERVER_NAME'];
+				preg_match('/^(?:https?:\/\/)?(?:[^@\n]+@)?(?:www\.)?([^:\/\n?]+)/', $domainname , $matches);     
+				$domainsnow = $matches[1];
+				$domainsold = $this->Company_model->getDomainbyALLS($domainsnow);
+        		// print_r($this->db->last_query());exit();
+				foreach ($domainsold as $key => $new_domains) {
+					$domains[] = $new_domains->com_website;
+				}
+
+				$this->ftp->connect($config);
+
+				$filename = $news_id.'.jpg';
+				$filename1 = '../images/news/'.$news_id.'.jpg';
+
+				foreach ($domains as $domain) {
+					$folder = "/domains/$domain/public_html/images/";
+					if ($this->ftp->list_files($folder) === FALSE) {
+						$this->ftp->mkdir($folder);
+						$this->ftp->chmod($folder, 0777);
+					}
+
+					$folder = "/domains/$domain/public_html/images/news/";
+					if ($this->ftp->list_files($folder) === FALSE) {
+						$this->ftp->mkdir($folder);
+						$this->ftp->chmod($folder, 0777);
+					}
+            // $_FILES['picture']["tmp_name"];
+					$this->ftp->upload($filename1, $folder.$filename);
+				}
+
+				$this->ftp->close();
+
+				echo "transfer complete";
+			}
+			
 			$this->session->set_flashdata('msg','Edit Complete');
 		
 
