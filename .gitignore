@@ -3,7 +3,7 @@ application/cache/sessions/*
 assets_theme_2020_v1
 oaun
 image_example
-images
+images/*
 upload
 
 icon
