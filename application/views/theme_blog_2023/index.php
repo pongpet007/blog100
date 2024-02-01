@@ -130,57 +130,61 @@
             </div>
             <div class="row">
                 <div class="col-lg-12 pd-mySwiper">
-                    <div class="swiper mySwiperss">
-                        <div class="swiper-wrapper">
+                <div class="swiper mySwiperss">
+                    <?/*?><div class="swiper mySwiperss"><?*/?>
+                    
+                        <div class="row">
                             <?php foreach ($productsallnew as $key => $productsallnews) { ?>
                                 <? $product_image = $productsallnews->pictures; ?>
-                                <div class="swiper-slide swiper-product">
-                                    <div class="row">
-                                        <div class="col-lg-12">
-                                            <?php   
-                                            $filepath  = "images/product_new/detail_".$product_image[0]->pro_pic_id.'_300.webp'; 
-                                            ?>
-                                            <? if(is_file($filepath)) { ?>
-                                                <div class="image-product">
-                                                    <a href="<? echo base_url($this->session->userdata('site_lang_name')); ?>/products-detail/<? echo $productsallnews->pro_url ?>">
-                                                        <img src="<?php echo base_url($filepath); ?>" style="width: 100%;" alt="<?=$companyData->com_name?>">
-                                                    </a>
-                                                </div>
-                                            <? } ?>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-lg-12">
-                                            <div class="product-detail" style="text-align: left;">
-                                                <h1 style="">
-                                                    <a style="overflow: hidden;
-                                                    text-overflow: ellipsis;
-                                                    display: -webkit-box;
-                                                    -webkit-line-clamp: 2;height: 60px;
-                                                    -webkit-box-orient: vertical;" href="<? echo base_url($this->session->userdata('site_lang_name')); ?>/products-detail/<? echo $productsallnews->pro_url ?>">
-                                                    <?=$productsallnews->pro_name ?>
-                                                </a>
-                                            </h1>
-                                                <?/*?>
-                                                <div class="detail"><?=$productsallnews->pro_desc_short ?></div>
-                                                <?*/?>
-                                                <a href="<? echo base_url($this->session->userdata('site_lang_name')); ?>/products-detail/<? echo $productsallnews->pro_url ?>">
-                                                    <h2 style="text-align: right;font-size: 16px;line-height: 30px;font-weight: 400;text-align: left;">ดูเพิ่มเติม</h2>
-                                                </a>
+                                <div class="col-2">
+                                <div class="swiper-product ">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <?php   
+                                                $filepath  = "images/product_new/detail_".$product_image[0]->pro_pic_id.'_300.webp'; 
+                                                ?>
+                                                <? if(is_file($filepath)) { ?>
+                                                    <div class="image-product">
+                                                        <a href="<? echo base_url($this->session->userdata('site_lang_name')); ?>/products-detail/<? echo $productsallnews->pro_url ?>">
+                                                            <img src="<?php echo base_url($filepath); ?>" style="width: 100%;" alt="<?=$companyData->com_name?>">
+                                                        </a>
+                                                    </div>
+                                                <? } ?>
                                             </div>
                                         </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="product-detail" style="text-align: left;">
+                                                    <h1 style="">
+                                                        <a style="overflow: hidden;
+                                                        text-overflow: ellipsis;
+                                                        display: -webkit-box;
+                                                        -webkit-line-clamp: 2;height: 60px;
+                                                        -webkit-box-orient: vertical;" href="<? echo base_url($this->session->userdata('site_lang_name')); ?>/products-detail/<? echo $productsallnews->pro_url ?>">
+                                                        <?=$productsallnews->pro_name ?>
+                                                    </a>
+                                                </h1>
+                                                    <?/*?>
+                                                    <div class="detail"><?=$productsallnews->pro_desc_short ?></div>
+                                                    <?*/?>
+                                                    <a href="<? echo base_url($this->session->userdata('site_lang_name')); ?>/products-detail/<? echo $productsallnews->pro_url ?>">
+                                                        <h2 style="text-align: right;font-size: 16px;line-height: 30px;font-weight: 400;text-align: left;">ดูเพิ่มเติม</h2>
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </div>
+
+
                                     </div>
-
-
                                 </div>
+                                
                             <? } ?>
                         </div>
                         
                         <?/*?><div class="swiper-pagination"></div><?*/?>
                     </div>
-                    <div class="swiper-button-next swiper-button-next-1"></div>
-                    <div class="swiper-button-prev swiper-button-prev-1"></div>
+                    
                 </div>
             </div>
         </div>
@@ -243,6 +247,7 @@
                 position: relative;
             }
         </style>
+        <?/*?>
         <script type="text/javascript">
             var swiper = new Swiper(".mySwiperss", {
                 loop: true,
@@ -263,6 +268,7 @@
                 },
             });
         </script>
+        <?*/?>
     </div>
 
     <div id="section3">
@@ -271,7 +277,7 @@
                 <?php foreach ($bannerads as $key => $new_bannerads) { ?>
                     <?php $filepath = "images/banner/".$new_bannerads->banner_id.'_mobile.webp'; ?>
                     <? if(is_file($filepath)) { ?>
-                        <div class="col-lg-3">
+                        <div class="col-lg-3" style="padding-bottom: 15px;">
                             <a href="#">
                                 <img src="<?php echo base_url($filepath); ?>" style="width: 100%;" alt="">
                             </a>
@@ -503,11 +509,11 @@
             </div>
             <div class="row">
                 <div class="col-lg-12">
-                    <div class="swiper swiperbrand">
-                        <div class="swiper-wrapper">
+                    <div class="swiperbrand">
+                        <div class="row">
                             <?php foreach ($brand as $new_brand) { ?>
-                                <div class="swiper-slide swiper-brands ">
-                                    <div class="" style="">
+                                <div class="col-1 ">
+                                    <div class="swiper-brands " style="">
                                         <a href="<?=$new_brand->brand_url?>">
                                             <img src="<?php echo base_url() ?>images/brand/<?php echo $new_brand->brand_id ?>.jpg?<?=rand()?>" alt="<?=$new_brand->brand_name ?>" style="width: 100%;">
                                         </a>
@@ -516,8 +522,7 @@
                                 </div>
                             <?php } ?>  
                         </div>
-                        <div class="swiper-button-next swiper-button-next-2"></div>
-                        <div class="swiper-button-prev swiper-button-prev-2"></div>
+                        
                     </div>
                 </div>
             </div>
