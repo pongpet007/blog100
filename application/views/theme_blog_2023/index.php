@@ -22,11 +22,14 @@
         <div class="swiper mySwiperssBanner">
             <div class="swiper-wrapper">
                 <?php foreach ($bannermain as $key => $bannermains) { ?>
-                    <div class="swiper-slide">
-                        <a href="#">
-                            <img src="<?=base_url()?>images/banner/<?=$bannermains->banner_id?>_mobile.webp" style="width: 100%;">
-                        </a>
-                    </div>
+                    <?php if ($key == 0) { ?>
+                        <div class="swiper-slide">
+                            <a href="#">
+                                <img src="<?=base_url()?>images/banner/<?=$bannermains->banner_id?>_mobile.webp" style="width: 100%;">
+                            </a>
+                        </div>
+                    <?php } ?>
+                        
                 <? } ?>
             </div>
         </div>
