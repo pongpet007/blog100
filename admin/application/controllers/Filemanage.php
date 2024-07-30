@@ -70,6 +70,7 @@ class Filemanage extends CI_Controller
 	public function upload()
 	{
 		$fs = pathinfo($_FILES['upload']['name']);
+		// print_r($_FILES['upload']);exit();
 		$filename = date('YMd_') . time() . '.' . $fs['extension'];
 		$url = '../images/upload/' . $filename;
 
@@ -90,6 +91,7 @@ class Filemanage extends CI_Controller
 				$message = "Error moving uploaded file. Check the script is granted Read/Write/Modify permissions.";
 			}
 			//$url = "../" . $url;
+			// print_r($url);exit();
 		}
 
 		if ($message != "") {
@@ -106,26 +108,34 @@ class Filemanage extends CI_Controller
 
 		
 
-		$this->load->library('ftp');
+			$this->load->library('ftp');
 
 			$config['hostname'] = '27.254.96.231';
 			$config['username'] = 'brand100';
 			$config['password'] = 'Bra1212312121!@#$%^';
 			$config['debug']        = TRUE;
 
-			$domainsnow = $_SERVER['SERVER_NAME'];
-			$domainsold = $this->Company_model->getDomainbyALLS($domainsnow);
+			// $domainsnow = $_SERVER['SERVER_NAME'];
 
-			foreach ($domainsold as $key => $new_domains) {
-				$domains[] = $new_domains->com_website;
-			}
+			$domainname = $_SERVER['SERVER_NAME'];
+        	preg_match('/^(?:https?:\/\/)?(?:[^@\n]+@)?(?:www\.)?([^:\/\n?]+)/', $domainname , $matches);     
+			$domainsnow = $matches[1];
+
+			// print_r($domainsnow);exit();
+			$domainsold = $this->Company_model->getDomainbyALLS($domainsnow);
+			// echo $this->db->last_query();
+			
+			// foreach ($domainsold as $key => $new_domains) {
+			// 	$domains[] = $new_domains->com_website;
+			// }
 
 			$this->ftp->connect($config);
 
 			// $filename = "detail_". $pro_pic_id ."_300.webp";
 			$filename1 = '../images/upload/'.$filename.'';
 
-			foreach ($domains as $domain) {
+			foreach ($domainsold as $key => $new_domains) {
+				$domain = $new_domains->com_website;
 				$folder = "/domains/$domain/public_html/images/";
 				if ($this->ftp->list_files($folder) === FALSE) {
 					$this->ftp->mkdir($folder);

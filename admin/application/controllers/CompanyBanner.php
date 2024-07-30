@@ -204,7 +204,8 @@ class CompanyBanner extends CI_Controller {
 			    }
 			    else if (preg_match('/bmp/i',$f_type)){
 			        $imageTmp=imagecreatefrombmp($temp_filepath);   
-			    }else if (preg_match('/webp/i',$f_type)){
+			    }
+			    else if (preg_match('/webp/i',$f_type)){
 			        $imageTmp=imagecreatefromwebp($temp_filepath);   
 			    }
 			    // print_r($imageTmp);exit();
@@ -314,14 +315,14 @@ class CompanyBanner extends CI_Controller {
 		}
 	}
 
-	public function delete($com_id,$banner_id){
+	public function delete($banner_id){
 		$this->db->where('banner_id',$banner_id);
 		$this->db->delete('banner');
 
-		$filepath = "../images/banner/{$banner_id}.jpg";
-		if(is_file($filepath)){
-			unlink($filepath);
-		}
+		// $filepath = "../images/banner/{$banner_id}.jpg";
+		// if(is_file($filepath)){
+		// 	unlink($filepath);
+		// }
 		$this->session->set_flashdata('msg','Delete Complete');
 
 		echo "<script>alert('deleted');window.opener.location.reload();window.close();</script>";	

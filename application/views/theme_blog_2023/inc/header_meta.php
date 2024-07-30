@@ -1,9 +1,9 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title></title>
-    <meta name="description" content="">
-    <meta name="keywords" content="" />
+    <title><?=$meta_title?></title>
+    <meta name="description" content="<?=$meta_description?>">
+    <meta name="keywords" content="<?=$meta_keyword?>" />
     <meta name="robots" content="index, follow" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="author" content="สินค้าอุตสาหกรรม Brandex Directory Co., Ltd." /> 
