@@ -89,8 +89,7 @@ class Company_model extends CI_Model{
 	}
 
 	public function getOneDomain($domain){
-			
-			
+
 		$this->db->from('company')
 				 ->join("company_language",'company.com_id=company_language.com_id ','left')
 				 ->join('theme','company.theme_id = theme.theme_id','left');

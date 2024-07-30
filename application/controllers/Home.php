@@ -41,7 +41,12 @@ class Home extends CI_Controller {
 		//korn
 		$data = array();
 		$company = $this->Company_model->getOneDomain($domainname);
+		// print_r($this->db->last_query());exit();
+		$data['meta_title'] = $company->meta_title;
+		$data['meta_keyword'] = $company->meta_keyword;
+		$data['meta_description'] = $company->meta_description;
 
+		
 		// if (is_object($company) and $company->com_id > 0) {
 		// 	// ปรับใหม่วันที่ 10/1/2024
 		// 	if(!($this->session->has_userdata('viewed'))){
@@ -74,9 +79,7 @@ class Home extends CI_Controller {
 
 		$menu_id = "1";
 		$menu_meta = $this->Menu_model->getOne($menu_id);
-		$data['meta_title'] = $menu_meta->meta_title;
-		$data['meta_keyword'] = $menu_meta->meta_keyword;
-		$data['meta_description'] = $menu_meta->meta_description;
+		
 
 		$data['lang'] = $this->session->userdata('site_lang');
 
